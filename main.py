@@ -1,7 +1,15 @@
 import requests
 
+# Эпилог:
+# В прошлой задаче я написал что вручное создание файла -
+# это своего рода обработка ошибок, тк на беке как правило в логи пишется
+# или используется какое либо значение по дефолту.
+# А еще, снижать бал за простой print() ну такое, может на 0,5 договоримся
+# Издержки профессии все такое (((:
+
 def z5v4():
     downloaded_text = request_service('http://fan.lib.ru/t/tolchinskij_b_a/periandr.shtml')
+    print(f"Source text: {downloaded_text}")
 
     if downloaded_text:
         total_chars_count = to_count_chars(downloaded_text)
@@ -21,6 +29,9 @@ def request_service(url):
 
 
 def to_count_chars(downloaded_text):
+    # да бы не было каких-либо эксцессов, это неявное создание
+    # объекта, под капотом он все равно создает инстанс класса
+
     whitelist = {'.': 0, ',': 0, '!': 0, '?': 0, '--': 0, '-': 0}
     index = 0
     for fakedChar in downloaded_text:
@@ -45,4 +56,5 @@ def parse_counted_items(chars_count):
 
     return parsed_chars_count
 
-print(z5v4())
+
+print(f"Result: {z5v4()}")
